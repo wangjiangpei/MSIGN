@@ -48,8 +48,8 @@ public class ApplicationInfoUtil {
      *
      * @param context
      */
-    public static List<AppInfo> getAllProgramInfo(List<AppInfo> allApplist,
-                                                  Context context) {
+    public static List<AppInfo> getAllProgramInfo(
+            Context context) {
         List<AppInfo> systemAppList = new ArrayList<AppInfo>();
         getAllProgramInfo(systemAppList, context, DEFAULT);
         return systemAppList;

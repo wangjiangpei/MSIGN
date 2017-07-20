@@ -2,9 +2,8 @@ package com.dscs.sign.handler;
 
 import android.os.Handler;
 import android.os.Message;
-import android.widget.Toast;
 
-import com.dscs.sign.MainActivity;
+import com.dscs.sign.activity.IView;
 import com.dscs.sign.bean.AppInfo;
 
 import java.lang.ref.WeakReference;
@@ -15,9 +14,9 @@ import java.util.List;
  */
 
 public class MyHandler extends Handler {
-    WeakReference<MainActivity> weak;
-    public MyHandler(MainActivity mainActivity) {
-        weak = new WeakReference<MainActivity>(mainActivity);
+    WeakReference<IView> weak;
+    public MyHandler(IView mainActivity) {
+        weak = new WeakReference<IView>(mainActivity);
     }
 
     @Override
@@ -27,7 +26,7 @@ public class MyHandler extends Handler {
             if (msg.obj!=null){
                 weak.get().upData((List<AppInfo>) msg.obj);
             }else{
-                Toast.makeText(weak.get(), "获取数据失败", Toast.LENGTH_SHORT).show();
+                weak.get().showError("获取数据失败");
             }
         }
     }
