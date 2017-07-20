@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/appInfo_all"
+        android:title="@string/appInfo_all" />
+    <item
+        android:id="@+id/appInfo_system"
+        android:orderInCategory="100"
+        android:title="@string/appInfo_system" />
+    <item
+        android:id="@+id/appInfo_nonsystem"
+        android:orderInCategory="100"
+        android:title="@string/appInfo_nonsystem" />
+</menu>

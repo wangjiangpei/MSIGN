@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">签名查看器</string>
+    <string name="appInfo_all">获取全部应用</string>
+    <string name="appInfo_system">获取系统应用</string>
+    <string name="appInfo_nonsystem">获取非系统应用</string>
+</resources>

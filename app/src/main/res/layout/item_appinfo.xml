@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dip">
+
+    <ImageView
+        android:id="@+id/app_icon"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:layout_margin="5dip" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dip"
+            android:layout_above="@+id/app_packname"
+            >
+
+            <TextView
+                android:id="@+id/app_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:textColor="#000"
+                tools:text="撒啥" />
+
+            <TextView
+                android:id="@+id/app_time"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:paddingRight="10dip"
+                android:textColor="#000"
+                android:textSize="10dip"
+                tools:text="2017/07/19" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/app_packname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="5dip"
+            android:textColor="#000"
+            android:textSize="11dip"
+            tools:text="com.dscs.tools" />
+    </RelativeLayout>
+</LinearLayout>
