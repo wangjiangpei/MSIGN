@@ -10,6 +10,7 @@ import com.dscs.sign.activity.presenter.PackPresenter;
 import com.dscs.sign.bean.AppInfo;
 import com.dscs.sign.tools.Md5;
 import com.dscs.sign.utils.ApplicationInfoUtil;
+import com.dscs.sign.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,6 +44,7 @@ public class PackModel implements IModel {
                         appList.addAll(ApplicationInfoUtil.getAllNonsystemProgramInfo(iView.getContext()));
                         break;
                 }
+                LogUtils.i(appList.size()+"條");
                 Collections.sort(appList);
                 packPresenter.handler.sendMessage(packPresenter.handler.obtainMessage(1, appList));
             }

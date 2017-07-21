@@ -3,4 +3,11 @@
     <string name="appInfo_all">获取全部应用</string>
     <string name="appInfo_system">获取系统应用</string>
     <string name="appInfo_nonsystem">获取非系统应用</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="and">关于</string>
 </resources>

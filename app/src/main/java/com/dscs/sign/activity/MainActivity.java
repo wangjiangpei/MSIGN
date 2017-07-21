@@ -4,7 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,13 +18,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.dscs.sign.R;
 import com.dscs.sign.activity.presenter.PackPresenter;
 import com.dscs.sign.adapter.AppInfoAdapter;
 import com.dscs.sign.bean.AppInfo;
+import com.zyao89.view.zloading.ZLoadingDialog;
+import com.zyao89.view.zloading.Z_TYPE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +39,16 @@ public class MainActivity extends AppCompatActivity implements IView {
     Toolbar toolBar;
     @BindView(R.id.listView)
     ListView listView;
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+    @BindView(R.id.nav_view)
+    NavigationView navView;
     private List<AppInfo> appList = new ArrayList<>();
     private AppInfoAdapter adapter;
     private ProgressDialog progressDialog;
     PackPresenter packPresenter;
+    ZLoadingDialog dialog = new ZLoadingDialog(MainActivity.this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +57,50 @@ public class MainActivity extends AppCompatActivity implements IView {
         ButterKnife.bind(this);
         setSupportActionBar(toolBar);
         packPresenter = new PackPresenter(this);
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("加载中...");
+        init();
         initListView();
         packPresenter.loadData(3);
     }
+
+    private void init() {
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+        dialog.setLoadingBuilder(Z_TYPE.CIRCLE_CLOCK)//设置类型
+                .setLoadingColor(Color.BLUE)//颜色
+                .setHintText("Loading...")
+                .show();
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_manage:
+                        break;
+                    case R.id.nav_share:
+                        break;
+                    case R.id.nav_send:
+                        break;
+                    case R.id.nav_face:
+                        break;
+                    case R.id.nav_call:
+                        break;
+                    case R.id.nav_download:
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
     @Override
     public void showError(String msg) {
-        Toast.makeText(this, "error:"+msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "error:" + msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showMessage(String msg) {
-        Toast.makeText(this, "message:"+msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "message:" + msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -100,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements IView {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        dialog.show();
         switch (item.getItemId()) {
             case R.id.appInfo_all:
                 packPresenter.loadData(1);
@@ -121,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements IView {
 
     @Override
     public void upData(Object obj) {
-        progressDialog.dismiss();
+        dialog.dismiss();
         appList.clear();
         appList.addAll((List<AppInfo>) obj);
         adapter.notifyDataSetInvalidated();

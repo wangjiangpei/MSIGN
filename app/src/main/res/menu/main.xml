@@ -2,13 +2,69 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/appInfo_all"
+        android:orderInCategory="1"
         android:title="@string/appInfo_all" />
     <item
         android:id="@+id/appInfo_system"
-        android:orderInCategory="100"
+        android:orderInCategory="2"
         android:title="@string/appInfo_system" />
     <item
         android:id="@+id/appInfo_nonsystem"
-        android:orderInCategory="100"
+        android:orderInCategory="3"
         android:title="@string/appInfo_nonsystem" />
+    <item
+        android:orderInCategory="4"
+        android:title="阿萨德">
+        <menu>
+            <item
+                android:id="@+id/style1"
+                android:orderInCategory="4"
+                android:title="CIRCLE" />
+            <item
+                android:id="@+id/style2"
+                android:orderInCategory="4"
+                android:title="CIRCLE_CLOCK" />
+            <item
+                android:id="@+id/style3"
+                android:orderInCategory="4"
+                android:title="STAR_LOADING" />
+            <item
+                android:id="@+id/style4"
+                android:orderInCategory="4"
+                android:title="LEAF_ROTATE" />
+            <item
+                android:id="@+id/style5"
+                android:orderInCategory="4"
+                android:title="DOUBLE_CIRCLE" />
+            <item
+                android:id="@+id/style6"
+                android:orderInCategory="4"
+                android:title="PAC_MAN" />
+            <item
+                android:id="@+id/style7"
+                android:orderInCategory="4"
+                android:title="ELASTIC_BALL" />
+            <item
+                android:id="@+id/style8"
+                android:orderInCategory="4"
+                android:title="INFECTION_BALL" />
+            <item
+                android:id="@+id/style9"
+                android:orderInCategory="4"
+                android:title="INTERTWINE" />
+            <item
+                android:id="@+id/style10"
+                android:orderInCategory="4"
+                android:title="TEXT" />
+            <item
+                android:id="@+id/style11"
+                android:orderInCategory="4"
+                android:title="SEARCH_PATH" />
+            <item
+                android:id="@+id/style12"
+                android:orderInCategory="4"
+                android:title="ROTATE_CIRCLE" />
+        </menu>
+    </item>
+
 </menu>
