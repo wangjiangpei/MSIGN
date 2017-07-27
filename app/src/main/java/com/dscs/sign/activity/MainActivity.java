@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -67,6 +68,11 @@ public class MainActivity extends AppCompatActivity implements IView {
                 this, drawerLayout, toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
+        /**
+         * CIRCLE 扇形渐变到圆
+         * CIRCLE_CLOCK 扇形渐变到圆 钟表样式
+         * DOUBLE_CIRCLE  内外圈想到旋转
+         */
         dialog.setLoadingBuilder(Z_TYPE.CIRCLE_CLOCK)//设置类型
                 .setLoadingColor(Color.BLUE)//颜色
                 .setHintText("Loading...")
@@ -84,6 +90,9 @@ public class MainActivity extends AppCompatActivity implements IView {
                     case R.id.nav_face:
                         break;
                     case R.id.nav_call:
+                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:13522909414"));
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
                         break;
                     case R.id.nav_download:
                         break;
@@ -117,12 +126,12 @@ public class MainActivity extends AppCompatActivity implements IView {
                 final String str = packPresenter.getSignInfo(appList.get(i).packageName);
                 new AlertDialog.Builder(MainActivity.this).setTitle("SIGN")
                         .setMessage(str)
-                        .setNegativeButton("確定", null)
-                        .setPositiveButton("分享", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("取消", null)
+                        .setPositiveButton("发送", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent(Intent.ACTION_SEND);
-                                intent.setType("image/*");
+                                intent.setType("text/*");
                                 intent.putExtra(Intent.EXTRA_SUBJECT, "发送到");
                                 intent.putExtra(Intent.EXTRA_TEXT, str);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

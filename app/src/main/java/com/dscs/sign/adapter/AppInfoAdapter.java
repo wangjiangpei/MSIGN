@@ -57,6 +57,8 @@ public class AppInfoAdapter extends BaseAdapter {
         }
         vh.appIcon.setImageDrawable(appList.get(i).appIcon);
         vh.appName.setText(appList.get(i).appName);
+        vh.appVersion.setText("versionCode="+appList.get(i).versionCode+
+                ";\nversionName="+appList.get(i).versionName+":");
         vh.appPackname.setText(appList.get(i).packageName);
         vh.appTime.setText(
                 DateUtil.formateDate(
@@ -75,6 +77,8 @@ public class AppInfoAdapter extends BaseAdapter {
         TextView appPackname;
         @BindView(R.id.app_time)
         TextView appTime;
+        @BindView(R.id.app_version)
+        TextView appVersion;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
