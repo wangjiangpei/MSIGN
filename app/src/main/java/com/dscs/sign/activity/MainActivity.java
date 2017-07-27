@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements IView {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final String str = packPresenter.getSignInfo(appList.get(i).packageName);
+
                 new AlertDialog.Builder(MainActivity.this).setTitle("SIGN")
                         .setMessage(str)
                         .setNegativeButton("取消", null)
