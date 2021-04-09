@@ -1,5 +1,7 @@
 package com.dscs.sign.activity.presenter;
 
+import android.content.Context;
+
 import com.dscs.sign.activity.IView;
 import com.dscs.sign.activity.model.PackModel;
 import com.dscs.sign.handler.MyHandler;
@@ -36,6 +38,7 @@ public class PackPresenter {
         //带冒号大写
         String sign3 = MTextUrils.maohao(exChange(sign));
         final StringBuilder sb = new StringBuilder();
+
         sb.append(sign).append("\n")
                 .append(sign1).append("\n")
                 .append(sign2).append("\n")
@@ -45,5 +48,9 @@ public class PackPresenter {
 
     public void showError(String s) {
         iView.showError(s);
+    }
+
+    public boolean isDebug(String packageName) {
+        return iModel.isDebuggable(iModel.getRawSignature((Context) iView, packageName));
     }
 }

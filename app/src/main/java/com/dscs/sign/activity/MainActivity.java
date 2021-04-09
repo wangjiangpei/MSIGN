@@ -5,10 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -42,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements IView {
     ListView listView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
-    @BindView(R.id.nav_view)
-    NavigationView navView;
+    //    @BindView(R.id.nav_view)
+//    NavigationView navView;
     private List<AppInfo> appList = new ArrayList<>();
     private AppInfoAdapter adapter;
     private ProgressDialog progressDialog;
@@ -64,42 +61,45 @@ public class MainActivity extends AppCompatActivity implements IView {
     }
 
     private void init() {
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.setDrawerListener(toggle);
-        toggle.syncState();
+        if (android.os.Build.VERSION.SDK_INT > 19) {
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawerLayout, toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawerLayout.setDrawerListener(toggle);
+            toggle.syncState();
+        }
         /**
          * CIRCLE 扇形渐变到圆
          * CIRCLE_CLOCK 扇形渐变到圆 钟表样式
-         * DOUBLE_CIRCLE  内外圈想到旋转
+         * DOUBLE_CIRCLE  内外圈相对旋转
          */
         dialog.setLoadingBuilder(Z_TYPE.CIRCLE_CLOCK)//设置类型
                 .setLoadingColor(Color.BLUE)//颜色
                 .setHintText("Loading...")
+                .setCanceledOnTouchOutside(false)
                 .show();
-        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.nav_manage:
-                        break;
-                    case R.id.nav_share:
-                        break;
-                    case R.id.nav_send:
-                        break;
-                    case R.id.nav_face:
-                        break;
-                    case R.id.nav_call:
-                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:13522909414"));
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        break;
-                    case R.id.nav_download:
-                        break;
-                }
-                return false;
-            }
-        });
+//        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId()) {
+//                    case R.id.nav_manage:
+//                        break;
+//                    case R.id.nav_share:
+//                        break;
+//                    case R.id.nav_send:
+//                        break;
+//                    case R.id.nav_face:
+//                        break;
+//                    case R.id.nav_call:
+//                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:13522909414"));
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        startActivity(intent);
+//                        break;
+//                    case R.id.nav_download:
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
     }
 
     @Override
@@ -124,8 +124,9 @@ public class MainActivity extends AppCompatActivity implements IView {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final String str = packPresenter.getSignInfo(appList.get(i).packageName);
-
-                new AlertDialog.Builder(MainActivity.this).setTitle("SIGN")
+                String debugFlag = (packPresenter.isDebug(appList.get(i).packageName)) ? "debug" : "release";
+                new AlertDialog.Builder(MainActivity.this).
+                        setTitle("SIGN(" + debugFlag + ")")
                         .setMessage(str)
                         .setNegativeButton("取消", null)
                         .setPositiveButton("发送", new DialogInterface.OnClickListener() {
